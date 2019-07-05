@@ -21,6 +21,7 @@
 
 <script>
 	import basics from '@/pages/basics/home.vue'
+	import user from '@/pages/basics/user.vue'
 	export default {
 		components: { basics },
 		data() {
@@ -31,12 +32,12 @@
 					info: {title: '消息', icon:'cuIcon-comment',info:49, click: false, action: false},
 					cash: {title: '收银', icon:'cu-btn cuIcon-scan bg-green shadow',info:0, click: false, action: true},
 					report: {title: '报表', icon:'cuIcon-rankfill',info:0, click: false, action: false},
-					my: {title: '我的', icon:'cuIcon-my',info:0, click: false, action: false},
+					user: {title: '我的', icon:'cuIcon-my',info:0, click: false, action: false},
 				}
 			}
 		},
 		onLoad() {
-
+			this.BuildMobile()
 		},
 		methods: {
 			NavChange: function(e) {
@@ -48,6 +49,13 @@
 					this.tabbar[key].click = false
 				}
 				this.tabbar[this.PageCur].click = true
+			},
+			BuildMobile(){
+				if (this.$store.getters.mobile === undefined) {
+					uni.navigateTo({
+						url: '/pages/user/buildMobile'
+					})
+				}
 			}
 		}
 	}

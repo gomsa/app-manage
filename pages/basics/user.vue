@@ -1,8 +1,6 @@
 <template>
 	<view>
 		<scroll-view scroll-y class="page">
-			<image src="/static/images/banner1.png"
-			 mode="widthFix" class="response"></image>
 			<view class="nav-list">
 				<navigator hover-class="none" :url="'/pages/basics/' + item.name" class="nav-li" navigateTo :class="'bg-'+item.color"
 				 :style="[{animation: 'show ' + ((index+1)*0.2+1) + 's 1'}]" v-for="(item,index) in elements" :key="index">
@@ -18,7 +16,7 @@
 
 <script>
 	export default {
-		name: "basics",
+		name: "user",
 		data() {
 			return {
 				elements: [{

@@ -1,5 +1,4 @@
 <script>
-	import '@/utils/init.js'
 	import Vue from 'vue'
 	export default {
 		onLaunch: function() {
@@ -30,9 +29,29 @@
 		},
 		onShow: function() {
 			console.log('App Show')
+			// 获取程序样式
+			this.$store.dispatch('config/setOauthProvider')
+			// 小程序自动登录
+			this.mpLogin()
+			this.getInfo()
 		},
 		onHide: function() {
 			console.log('App Hide')
+		},
+		methods: {
+			mpLogin(){
+				if (this.$store.getters.token == "") {
+					this.$store.dispatch('user/mpLogin', this.$store.getters.oauthProvider)
+					.then(data => {
+						this.getInfo()
+					})
+				}
+			},
+			getInfo(){
+				if (this.$store.getters.token != "") {
+					this.$store.dispatch('user/getInfo', this.$store.getters.oauthProvider)
+				}
+			}
 		}
 	}
 </script>
