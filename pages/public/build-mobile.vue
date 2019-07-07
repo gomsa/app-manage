@@ -33,7 +33,10 @@
 	import { mobileVerify } from '@/api/nats'
 	import { userMobileBuild } from '@/api/user'
 
-	import { userMobileBuild } from '@/utils/validate'
+	import { isMobile } from '@/utils/validate'
+	import {  
+        mapGetters 
+    } from 'vuex';  
 	export default {
 		name: "buildMobile",
 		data() {
@@ -41,7 +44,9 @@
 				title: '绑定手机',
 				form:{
 					user:{
+						name:'',
 						mobile:'',
+						avatar:'',
 					},
 					verify:'',
 					uuid:'',
@@ -56,10 +61,38 @@
 				timerId: null,
 			};
 		},
+		computed: {
+			...mapGetters([
+				'oauthProvider'
+			])
+		},
+		onShow() {
+			this.getUserInfo()
+		},
 		methods: {
-			getSmsCode: function() {
+			getUserInfo() {
+				if (this.oauthProvider != '' || this.oauthProvider != undefined) {
+					uni.getUserInfo({
+						provider: this.oauthProvider,
+						success:  (infoRes)=> {
+							const userInfo = infoRes.userInfo
+							this.form.user.name = userInfo.nickName
+							this.form.user.avatar = userInfo.avatarUrl
+						}
+					});
+				}
+			},
+			getSmsCode() {
 				if (this.smsbtn.status == true ) {
 					console.log('message：', "别着急！短信已经发送了~");
+					return false;
+				}
+				if (!isMobile(this.form.user.mobile)) {
+					uni.showToast({
+						title: '请输入正确的手机号码',
+						icon: 'none',
+						duration: 3000
+					});
 					return false;
 				}
 				this.mobileFocus= false,
@@ -98,13 +131,18 @@
 					const data = response.data
 					if (data.valid) {
 						uni.showToast({
-							title: detail,
+							title: '绑定手机成功',
 							icon: 'success',
 							duration: 3000
 						});
-						uni.navigateTo({
-							url: '/pages/index/index'
-						})
+						// 重新获取用户信息
+						this.$store.dispatch('user/getInfo', this.oauthProvider)
+						// 等待 1 秒 跳转到首页
+						setTimeout(()=>{
+							uni.navigateTo({
+								url: '/pages/index/index'
+							})
+						},1000)
 					}
 				})
 			}

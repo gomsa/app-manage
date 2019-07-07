@@ -8,7 +8,7 @@
 				 :style="[{animation: 'show ' + ((index+1)*0.2+1) + 's 1'}]" v-for="(item,index) in elements" :key="index">
 					<view class="nav-title">{{item.title}}</view>
 					<view class="nav-name">{{item.name}}</view>
-					<text :class="'gomsaIcon-' + item.cuIcon"></text>
+					<text :class="'gIcon-' + item.cuIcon"></text>
 				</navigator>
 			</view>
 			<view class="cu-tabbar-height"></view>

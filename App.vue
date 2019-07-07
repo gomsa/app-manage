@@ -1,6 +1,15 @@
 <script>
 	import Vue from 'vue'
+	import {  
+        mapGetters 
+    } from 'vuex';  
 	export default {
+		computed: {
+			...mapGetters([
+				'token', 
+				'oauthProvider'
+			])
+		},
 		onLaunch: function() {
 			uni.getSystemInfo({
 				success: function(e) {
@@ -40,16 +49,16 @@
 		},
 		methods: {
 			mpLogin(){
-				if (this.$store.getters.token == "") {
-					this.$store.dispatch('user/mpLogin', this.$store.getters.oauthProvider)
+				if (this.token== "") {
+					this.$store.dispatch('user/mpLogin', this.oauthProvider)
 					.then(data => {
 						this.getInfo()
 					})
 				}
 			},
 			getInfo(){
-				if (this.$store.getters.token != "") {
-					this.$store.dispatch('user/getInfo', this.$store.getters.oauthProvider)
+				if (this.token != "") {
+					this.$store.dispatch('user/getInfo', this.oauthProvider)
 				}
 			}
 		}

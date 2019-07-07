@@ -1,6 +1,7 @@
 <template>
 	<view>
-		<basics v-if="PageCur=='basics'"></basics>
+		<basics v-if="PageCur=='basics'"/>
+		<user v-if="PageCur=='user'"/>
 		<!-- cu-bar tabbar bg-white shadow foot -->
 		<view class="cu-bar tabbar bg-white shadow foot">
 			<view 
@@ -22,19 +23,28 @@
 <script>
 	import basics from '@/pages/basics/home.vue'
 	import user from '@/pages/basics/user.vue'
+	import { mapState } from 'vuex';
 	export default {
-		components: { basics },
+		components: { 
+			basics,
+			user,
+		},
 		data() {
 			return {
-				PageCur: 'basics',
+				PageCur: 'user',
 				tabbar:{
 					basics: {title: '首页', icon:'cuIcon-homefill',info:0, click: true, action: false},
-					info: {title: '消息', icon:'cuIcon-comment',info:49, click: false, action: false},
+					info: {title: '消息', icon:'cuIcon-comment',info:0, click: false, action: false},
 					cash: {title: '收银', icon:'cu-btn cuIcon-scan bg-green shadow',info:0, click: false, action: true},
 					report: {title: '报表', icon:'cuIcon-rankfill',info:0, click: false, action: false},
 					user: {title: '我的', icon:'cuIcon-my',info:0, click: false, action: false},
 				}
 			}
+		},
+		computed: {
+			...mapState({
+				mobile : state => state.user.mobile,
+			})
 		},
 		onLoad() {
 			this.BuildMobile()
@@ -51,9 +61,9 @@
 				this.tabbar[this.PageCur].click = true
 			},
 			BuildMobile(){
-				if (this.$store.getters.mobile === undefined) {
+				if (this.mobile === undefined) {
 					uni.navigateTo({
-						url: '/pages/user/buildMobile'
+						url: '/pages/public/build-mobile'
 					})
 				}
 			}
@@ -63,8 +73,8 @@
 
 <style>
 	.content {
-		text-align: center;
-		height: 400upx;
+		/* text-align: center;
+		height: 400upx; */
 	}
 
 	.logo {
