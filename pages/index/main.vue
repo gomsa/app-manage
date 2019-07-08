@@ -31,7 +31,7 @@
 		},
 		data() {
 			return {
-				PageCur: 'user',
+				PageCur: 'basics',
 				tabbar:{
 					basics: {title: '首页', icon:'cuIcon-homefill',info:0, click: true, action: false},
 					info: {title: '消息', icon:'cuIcon-comment',info:0, click: false, action: false},
@@ -72,10 +72,6 @@
 </script>
 
 <style>
-	.content {
-		/* text-align: center;
-		height: 400upx; */
-	}
 
 	.logo {
 		height: 200upx;

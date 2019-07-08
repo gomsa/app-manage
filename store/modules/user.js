@@ -2,6 +2,7 @@ import { mpLogin, login, logout, getInfo } from '@/api/auth'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 const state = {
   token: getToken(),
+  id:'',
   name: '',
   avatar: '',
   mobile: '',
@@ -11,6 +12,9 @@ const state = {
 const mutations = {
   SET_TOKEN: (state, token) => {
     state.token = token
+  },
+  SET_ID: (state, id) => {
+    state.id = id
   },
   SET_NAME: (state, name) => {
     state.name = name
@@ -73,11 +77,12 @@ const actions = {
           reject('Verification failed, please Login again.')
         }
 
-        const { name, avatar, mobile } = data.user
+        const { id, name, avatar, mobile } = data.user
         let roles = ['user']
         if ('roles' in data) {
           roles = data.roles
         }
+        commit('SET_ID', id)
         commit('SET_ROLES', roles)
         commit('SET_NAME', name)
         commit('SET_MOBILE', mobile)

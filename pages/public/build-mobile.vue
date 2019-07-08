@@ -120,6 +120,11 @@
 					const data = response.data
 					if (data.valid) {
 						this.form.uuid = data.uuid
+						uni.showToast({
+							title: '短信已发送',
+							icon: 'success',
+							duration: 3000
+						});
 					}
 				}).catch(error => {
 					console.log(error);

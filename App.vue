@@ -49,7 +49,7 @@
 		},
 		methods: {
 			mpLogin(){
-				if (this.token== "") {
+				if (this.token == "") {
 					this.$store.dispatch('user/mpLogin', this.oauthProvider)
 					.then(data => {
 						this.getInfo()

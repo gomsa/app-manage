@@ -1,7 +1,7 @@
 import http from '@/utils/vmeitime-http/interface'
 import store from '@/store'
 
-http.config.baseUrl = "http://gomsa.binzhou.vip/rpc"
+http.config.baseUrl = "https://api.xilewanggou.com/rpc"
 http.config.method = 'POST'
 //设置请求前拦截器
 http.interceptor.request = (config) => {

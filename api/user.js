@@ -10,6 +10,16 @@ export function userMobileBuild(data) {
     })
 }
 
+export function userSelfUpdate(data) {
+    return request({
+        data: {
+            'service': 'user-api',
+            'method': 'Users.SelfUpdate',
+            'request': data
+        }
+    })
+}
+
 export function userExist(data) {
     return request({
         data: {

@@ -129,16 +129,10 @@
     </view>  
 </template>  
 <script>  
-	import listCell from '@/components/mix-list-cell';
-    import {  
-        mapState 
-    } from 'vuex';  
+    import {mapState,mapActions} from 'vuex';  
 	let startY = 0, moveY = 0, pageAtTop = true;
     export default {
 		name: "user",
-		components: {
-			listCell
-		},
 		data(){
 			return {
 				coverTransform: 'translateY(0px)',
@@ -177,19 +171,13 @@
 			})
 		},
         methods: {
-
 			/**
 			 * 统一跳转接口,拦截未登录路由
 			 * navigator标签现在默认没有转场动画，所以用view
 			 */
-			navTo(url){
-				if(!this.hasLogin){
-					url = '/pages/public/login';
-				}
-				uni.navigateTo({  
-					url
-				})  
-			}, 
+			...mapActions([
+				'navTo'
+			]), 
 	
 			/**
 			 *  会员卡下拉和回弹

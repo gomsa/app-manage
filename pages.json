@@ -1,7 +1,7 @@
 {
 	"pages": [
 		{
-			"path": "pages/index/index",
+			"path": "pages/index/main",
 			"style": {
 				"navigationBarTitleText": "首页"
 			}
@@ -10,6 +10,18 @@
 			"path": "pages/public/build-mobile",
 			"style": {
 				"navigationBarTitleText": "绑定手机"
+			}
+		},
+		{
+			"path": "pages/user/name",
+			"style": {
+				"navigationBarTitleText": "更改昵称"
+			}
+		},
+		{
+			"path": "pages/user/info",
+			"style": {
+				"navigationBarTitleText": "个人信息"
 			}
 		}
 	],
