@@ -10,12 +10,12 @@
 				<picker mode="multiSelector" 
                     @change="DepmartmentChange" 
                     @columnchange="DepmartmentColumnChange" 
-                    :value="form.depmartment" 
+                    :value="depmartment" 
                     :range="depmartmentArray"   
                     range-key="name"
                 >
 					<view class="picker">
-						{{depmartmentArray[0][form.depmartment[0]].name}}，{{depmartmentArray[1][form.depmartment[1]].name}}，{{depmartmentArray[2][form.depmartment[2]].name}}
+						{{depmartmentArray[0][depmartment[0]].name}}，{{depmartmentArray[1][depmartment[1]].name}}，{{depmartmentArray[2][depmartment[2]].name}}
 					</view>
 				</picker>
 			</view>
@@ -31,8 +31,9 @@
 			return {
                 title: '添加商品',
                 form:{
-                    depmartment:[0,0,0]
+                    depmartment:'',
                 },
+                depmartment:[0,0,0],
                 depmartmentArray: [
                     [
                         {'name':'一楼', 'id':"100"},
@@ -43,13 +44,13 @@
                         {'name':'外联营', 'id':"110"},
                         {'name':'内联营', 'id':"120"},
                         {'name':'自营', 'id':"130"},
-                        {'name':'代销', 'id':"140"}, 
+                        {'name':'代销', 'id':"140"},
                     ],
                     [
                         {'name':'名烟', 'id':"111"},
                         {'name':'名酒', 'id':"112"},
                         {'name':'红磨坊', 'id':"113"},
-                        {'name':'梦金园', 'id':"114"}, 
+                        {'name':'梦金园', 'id':"114"},
                     ]
                 ],
 			};
@@ -57,6 +58,9 @@
         computed: {
 		},
 		onShow() {
+        },
+        mounted(){
+            this.getDepmartment()
 		},
 		methods: {
             /**
@@ -66,8 +70,21 @@
 			...mapActions([
 				'navTo'
             ]), 
+            // 获取部门编码
+            getDepmartment() {
+                const depmartment = uni.getStorageSync('Depmartment')
+                if (depmartment != '') {
+                    this.depmartment = depmartment
+                }
+            },
+            // 确认部门编码后赋值
             DepmartmentChange(e) {
-				this.form.depmartment = e.detail.value
+                this.depmartment = e.detail.value
+                uni.setStorageSync('Depmartment',this.depmartment)
+
+                // 根据 depmartment 获取最后一个部门的真实 id
+                const depmartmentLast = this.depmartment.slice(-1)[0]
+                this.form.depmartment = this.depmartmentArray.slice(-1)[0][depmartmentLast].id
             },
             DepmartmentColumnChange(e) {
                 console.log(e);
