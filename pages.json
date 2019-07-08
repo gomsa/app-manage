@@ -7,6 +7,24 @@
 			}
 		},
 		{
+			"path": "pages/goods/index",
+			"style": {
+				"navigationBarTitleText": "商品管理"
+			}
+		},
+		{
+			"path": "pages/goods/add",
+			"style": {
+				"navigationBarTitleText": "添加商品"
+			}
+		},
+		{
+			"path": "pages/goods/file",
+			"style": {
+				"navigationBarTitleText": "商品档案"
+			}
+		},
+		{
 			"path": "pages/public/build-mobile",
 			"style": {
 				"navigationBarTitleText": "绑定手机"

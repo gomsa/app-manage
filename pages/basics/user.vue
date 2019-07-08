@@ -55,7 +55,7 @@
 				</view>
 			</view>
 			<!-- 订单 -->
-			<view class="order-section">
+			<!-- <view class="order-section">
 				<view class="order-item" @click="navTo('/pages/order/order?state=0')" hover-class="common-hover"  :hover-stay-time="50">
 					<text class="yticon gIcon-babyfill"></text>
 					<text>全部订单</text>
@@ -72,7 +72,7 @@
 					<text class="yticon gIcon-sponsorfill"></text>
 					<text>退款/售后</text>
 				</view>
-			</view>
+			</view> -->
 			<!-- 浏览历史 -->
 			<view class="history-section icon">
 				<!-- <view class="sec-header">
@@ -89,7 +89,7 @@
 				</scroll-view> -->
 			</view>
 			<view class="cu-list menu">
-				<view class="cu-item arrow">
+				<!-- <view class="cu-item arrow">
 					<button class="cu-btn content">
 						<text class="cuIcon-btn text-olive"></text>
 						<text class="text-grey">支付</text>
@@ -102,15 +102,19 @@
 					</button>
 					<view class="action">
 					</view>
-				</view>
+				</view> -->
 				<view class="cu-item arrow">
 					<view class="content">
 						<text class="cuIcon-tagfill text-red  margin-right-xs"></text>
 						<text class="text-grey">账号绑定</text>
 					</view>
 					<view class="action text-xl">
-						<text class="gIcon-weixin text-green"></text>
-						<text class="gIcon-qq text-blue"></text>
+						<text 
+							v-for="(itme,key) in build"
+							:key="key"
+							:class="'gIcon-social-'+itme"
+						>
+						</text>
 					</view>
 				</view>
 				<view class="cu-item arrow">
@@ -129,6 +133,7 @@
     </view>  
 </template>  
 <script>  
+	import { userBuild } from '@/api/socialite'
     import {mapState,mapActions} from 'vuex';  
 	let startY = 0, moveY = 0, pageAtTop = true;
     export default {
@@ -138,9 +143,8 @@
 				coverTransform: 'translateY(0px)',
 				coverTransition: '0s',
 				moving: false,
+				build:[],
 			}
-		},
-		onLoad(){
 		},
 		// #ifndef MP
 		onNavigationBarButtonTap(e) {
@@ -170,7 +174,17 @@
 				userRoles : state => state.user.roles,
 			})
 		},
+		mounted(){
+			this.getBuildSocialite()
+		},
         methods: {
+			// 获取绑定的账号
+			getBuildSocialite(){
+                userBuild({}).then(response => {
+					const data = response.data
+					this.build = data.build
+				})
+			},
 			/**
 			 * 统一跳转接口,拦截未登录路由
 			 * navigator标签现在默认没有转场动画，所以用view

@@ -34,8 +34,8 @@
 				PageCur: 'basics',
 				tabbar:{
 					basics: {title: '首页', icon:'cuIcon-homefill',info:0, click: true, action: false},
-					info: {title: '消息', icon:'cuIcon-comment',info:0, click: false, action: false},
-					cash: {title: '收银', icon:'cu-btn cuIcon-scan bg-green shadow',info:0, click: false, action: true},
+					// info: {title: '消息', icon:'cuIcon-comment',info:0, click: false, action: false},
+					// cash: {title: '收银', icon:'cu-btn cuIcon-scan bg-green shadow',info:0, click: false, action: true},
 					report: {title: '报表', icon:'cuIcon-rankfill',info:0, click: false, action: false},
 					user: {title: '我的', icon:'cuIcon-my',info:0, click: false, action: false},
 				}

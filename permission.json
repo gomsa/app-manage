@@ -1,0 +1,3 @@
+[
+  { "app": "app-manage", "service": "cashier", "method": "getGoods", "name": "收银查询商品", "description": "收银查询商品" },
+]

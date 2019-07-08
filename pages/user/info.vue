@@ -5,7 +5,7 @@
 			<block slot="content">{{title}}</block>
 		</cu-custom>
 	    <view class="cu-list menu">
-		    <view class="cu-item arrow" @click="navTo('/pages/user/info')">
+		    <view class="cu-item arrow">
 		    	<button class="cu-btn content">
 		    		<text class="text-grey">头像</text>
 		    	</button>
@@ -21,7 +21,7 @@
                     <text class="text-grey">{{userName || '游客'}}</text>
 				</view>
 		    </view>
-            <view class="cu-item arrow" @click="navTo('/pages/user/info')">
+            <view class="cu-item arrow">
 		    	<button class="cu-btn content">
 		    		<text class="text-grey">二维码</text>
 		    	</button>
